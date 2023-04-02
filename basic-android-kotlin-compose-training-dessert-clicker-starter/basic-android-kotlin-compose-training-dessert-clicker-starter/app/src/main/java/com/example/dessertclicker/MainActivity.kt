@@ -76,7 +76,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+override fun onStart() {
+    super.onStart()
+    Log.d(TAG, "onStart Called")
+}
 /**
  * Determine which dessert to show.
  */
@@ -133,13 +136,15 @@ private fun DessertClickerApp(
 
     var revenue by remember { mutableStateOf(0) }
     var dessertsSold by remember { mutableStateOf(0) }
+    var currentDessertImageId by remember {
+        mutableStateOf(desserts[currentDessertIndex].imageId)
 
     val currentDessertIndex by remember { mutableStateOf(0) }
 
     var currentDessertPrice by remember {
         mutableStateOf(desserts[currentDessertIndex].price)
     }
-    var currentDessertImageId by remember {
+    var currentDessertImageId by rememberSaveable {
         mutableStateOf(desserts[currentDessertIndex].imageId)
     }
 
@@ -304,4 +309,29 @@ fun MyDessertClickerAppPreview() {
     DessertClickerTheme {
         DessertClickerApp(listOf(Dessert(R.drawable.cupcake, 5, 0)))
     }
+}
+
+override fun onResume() {
+    super.onResume()
+    Log.d(TAG, "onResume Called")
+}
+
+override fun onRestart() {
+    super.onRestart()
+    Log.d(TAG, "onRestart Called")
+}
+
+override fun onPause() {
+    super.onPause()
+    Log.d(TAG, "onPause Called")
+}
+
+override fun onStop() {
+    super.onStop()
+    Log.d(TAG, "onStop Called")
+}
+
+override fun onDestroy() {
+    super.onDestroy()
+    Log.d(TAG, "onDestroy Called")
 }
